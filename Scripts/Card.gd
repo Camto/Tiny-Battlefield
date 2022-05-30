@@ -8,16 +8,16 @@ signal play(card, zone)
 signal move(card, zone)
 signal error_playing(msg)
 
-const Deck_Card = preload("res://Deck_Card.gd")
-const Hand_Card = preload("res://Hand_Card.gd")
-const Play_Card = preload("res://Play_Card.gd")
-const Discard_Card = preload("res://Discard_Card.gd")
+const Deck_Card = preload("res://Scripts/Deck_Card.gd")
+const Hand_Card = preload("res://Scripts/Hand_Card.gd")
+const Play_Card = preload("res://Scripts/Play_Card.gd")
+const Discard_Card = preload("res://Scripts/Discard_Card.gd")
 
-const Unit_Card_Data = preload("res://Unit_Card_Data.gd")
-const Building_Card_Data = preload("res://Building_Card_Data.gd")
-const Event_Card_Data = preload("res://Event_Card_Data.gd")
+const Unit_Card_Data = preload("res://Scripts/Unit_Card_Data.gd")
+const Building_Card_Data = preload("res://Scripts/Building_Card_Data.gd")
+const Event_Card_Data = preload("res://Scripts/Event_Card_Data.gd")
 
-const Tile = preload("res://Tile.gd")
+const Tile = preload("res://Scripts/Tile.gd")
 
 const width = 230
 const gap_in_hand = -40
@@ -47,6 +47,7 @@ func _process(delta):
 
 func set_hand_pos(idx, total):
 	home.x = (idx - float(total - 1) / 2) * dist_in_hand
+	home.y += rand_range(-10, 10)
 	up = home - Vector2(0, 100)
 
 func attempt_to_play_on(zone):
@@ -106,7 +107,7 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 		if Globals.can_play && Globals.turn_of == player && event.pressed:
 			dragging = true
 			z_index = 20
-		elif Globals.can_play && Globals.turn_of == player:
+		elif dragging && Globals.can_play && Globals.turn_of == player:
 			dragging = false
 			z_index = 0
 			emit_signal("drop", self)

@@ -6,7 +6,7 @@ signal hover(card)
 signal drop(card)
 signal play(card, zone)
 
-const Card = preload("res://Card.tscn")
+const Card = preload("res://Scenes/Card.tscn")
 
 func _ready():
 	for i in range(4):

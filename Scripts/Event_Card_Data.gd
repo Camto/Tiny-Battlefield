@@ -1,4 +1,4 @@
-extends "res://Card_Data.gd"
+extends "res://Scripts/Card_Data.gd"
 
 enum Targets {none, unit, building, any}
 

@@ -1,1 +1,0 @@
-extends "res://Card_State.gd"

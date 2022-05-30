@@ -7,7 +7,7 @@ signal card_hover(card)
 signal card_drop(card)
 signal card_move(card, zone)
 
-const Tile = preload("res://Tile.tscn")
+const Tile = preload("res://Scenes/Tile.tscn")
 
 func _ready():
 	for y in range(3):

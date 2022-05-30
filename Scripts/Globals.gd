@@ -1,8 +1,8 @@
 extends Node
 
-const Unit_Card_Data = preload("res://Unit_Card_Data.gd")
-const Building_Card_Data = preload("res://Building_Card_Data.gd")
-const Event_Card_Data = preload("res://Event_Card_Data.gd")
+const Unit_Card_Data = preload("res://Scripts/Unit_Card_Data.gd")
+const Building_Card_Data = preload("res://Scripts/Building_Card_Data.gd")
+const Event_Card_Data = preload("res://Scripts/Event_Card_Data.gd")
 
 enum Player {player, opponent}
 
@@ -55,6 +55,8 @@ func spend_gold(gold):
 		opponent_gold -= gold
 
 func _ready():
+	randomize()
+	
 	var card
 	
 	card = Unit_Card_Data.new()

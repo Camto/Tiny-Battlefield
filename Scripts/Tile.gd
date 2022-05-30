@@ -5,6 +5,8 @@ signal unhover(tile)
 
 const tile_size = 650/3
 
+onready var hightlight = $Highlight
+
 var pos = Vector2.ZERO
 
 var card
@@ -28,7 +30,9 @@ func adjacent(tile):
 		pos.y == tile.pos.y && abs(pos.x - tile.pos.x) == 1)
 
 func _on_Area2D_mouse_entered():
+	hightlight.visible = true
 	emit_signal("hover", self)
 
 func _on_Area2D_mouse_exited():
+	hightlight.visible = false
 	emit_signal("unhover", self)

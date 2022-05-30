@@ -16,12 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Tiny Battlefield"
-run/main_scene="res://Game.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://Scenes/Game.tscn"
+config/icon="res://Images/icon.png"
 
 [autoload]
 
-Globals="*res://Globals.gd"
+Globals="*res://Scripts/Globals.gd"
 
 [display]
 
@@ -33,4 +33,4 @@ window/stretch/aspect="expand"
 [rendering]
 
 environment/default_clear_color=Color( 1, 1, 1, 1 )
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://Resources/default_env.tres"
