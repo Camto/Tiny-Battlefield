@@ -5,13 +5,11 @@ signal unhover(tile)
 
 const tile_size = 650/3
 
-var x = 0
-var y = 0
+var pos = Vector2.ZERO
 
-func set_pos(x, y):
-	self.x = x
-	self.y = y
-	position = Vector2((x - 1) * tile_size, (y - 1) * tile_size)
+func set_pos(pos):
+	self.pos = pos
+	position = Vector2((pos.x - 1) * tile_size, (pos.y - 1) * tile_size)
 
 func _on_Area2D_mouse_entered():
 	emit_signal("hover", self)

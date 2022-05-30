@@ -15,3 +15,4 @@ position = Vector2( 960, 1000 )
 [connection signal="hover" from="Board" to="." method="_on_Board_hover"]
 [connection signal="unhover" from="Board" to="." method="_on_Board_unhover"]
 [connection signal="drop" from="Hand" to="." method="_on_Hand_drop"]
+[connection signal="play" from="Hand" to="." method="_on_Hand_play"]

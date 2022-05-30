@@ -1,15 +1,21 @@
 extends Node2D
 
-var board_parts_hovered = []
+onready var board = $Board
+onready var hand = $Hand
 
-func _on_Board_hover(object):
-	if !board_parts_hovered.has(object):
-		board_parts_hovered.append(object)
+var zones_hovered = []
 
-func _on_Board_unhover(object):
-	board_parts_hovered.erase(object)
+func _on_Board_hover(zone):
+	if !zones_hovered.has(zone):
+		zones_hovered.append(zone)
+
+func _on_Board_unhover(zone):
+	zones_hovered.erase(zone)
 
 func _on_Hand_drop(card):
-	if board_parts_hovered.size() > 0:
-		var part = board_parts_hovered[0]
-		part.visible = false
+	if zones_hovered.size() > 0:
+		var zone = zones_hovered[0]
+		card.attempt_to_play_on(zone)
+
+func _on_Hand_play(card, zone):
+	board.play(card, zone)
