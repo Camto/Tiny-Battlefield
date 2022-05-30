@@ -1,0 +1,163 @@
+Pay 1A: do one:
+- Draw a card.
+- Play a card.
+- Gain 1G.
+- Move any friendly unit.
+- Attack with any friendly unit.
+
+
+
+
+Fresh Conscript 0G
+Unit 0P
+
+Soldier 1G
+Unit 1P
+
+Athlete 1G
+Unit 1P
+Swift (When played, you can move or attack with this once.)
+
+Guard 1G
+Unit 1P
+Tough (This gains an extra health.)
+
+Pillaging Party 1G
+Unit 1P
+When this destroys a building, gain 1G.
+
+Conjured Shadow 1G
+Unit 0P
+When played, draw a card and gain 1G.
+
+Protagonist 1G
+Unit 1P
+Pay 1A + 2G: this gains 1P and the top effect that hasn't been gained yet:
+- Tough.
+- When this kills a unit, gain 1G.
+- When this kills a unit, draw a card.
+- At the start of your turn, win the game.
+
+Guardian Angel 2G
+Unit 1P
+When played, return one of your units to hand.
+
+Shusher 2G
+Unit 2P
+When played, silence an enemy unit.
+
+Knight 2G
+Unit 2P
+Swift
+
+Battle Eagle 2G
+Unit 1P
+Swift. Swift.
+
+
+Knight (in Shining Armor) 2G
+Unit 2P
+Swift
+------
+Captured Princess 1G
+Event
+Gain Knight from your deck.
+Make a building token on your opponent's side with the effect:
+- When this is destroyed, gain 1A and your units gain 1P.
+
+
+Mighty Knighty 3G
+Unit 3P
+Swift
+When played, gain 1A per other friendly unit with swift.
+
+Firecaster 3G
+Unit 1P
+When played, this kills any enemy unit.
+
+
+Twin Brother Romulus 3G
+Unit 2P
+Tough.
+When played, gain Twin Brother Remus from your deck.
+------
+Twin Brother Remus 2G
+Unit 1P
+When played, do one:
+- Gain Twin Brother Remus from your deck.
+- This damages an enemy unit.
+
+
+Giant 3G
+Unit 4P
+Tough
+
+Windwalker 3G
+Unit 1P
+Swift. Swift. Swift.
+
+
+
+
+Gold Mine 0G
+Building
+When this is destroyed, gain 1G.
+
+Farmland 1G
+Building
+At the start of every other turn, starting with your next turn, gain 1G.
+
+Catapult 1G
+Building
+Pay 1A + 1G: This damages anything.
+
+Village 2G
+Building
+At the start of your turn, gain 1A.
+
+Boot Camp 2G
+Building
+At the start of your turn, make a 1P unit token adjacent to this.
+
+Armory 2G
+Building
+Your units gain 1P.
+
+
+
+
+Ripen with Age 0G
+Event
+Replace a friendly nontoken unit with any from your choice of 3 random units with the same cost.
+
+Lightning Strikes Twice 0G
+Event
+The next event you play this turn happens twice. Gain 1A.
+
+Strategize 0G
+Event
+Draw two cards.
+
+Quick Thinking 0G
+Event
+Gain 2A.
+
+Second Take 1G
+Event
+Gain 1G and 1A. Draw a card.
+
+Gold Rush 1G
+Event
+Gain 3G.
+
+Recruiting 0G
+Event
+Play a unit from your choice of 3 random units with cost equal to your G. Lose all your G.
+
+Orcify 1G
+Event
+Any friendly unit gains 1P and tough.
+
+Fireball 2G
+Event
+This kills any enemy unit.
