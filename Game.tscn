@@ -12,6 +12,7 @@ position = Vector2( 960, 450 )
 
 [node name="Hand" parent="." instance=ExtResource( 3 )]
 position = Vector2( 960, 1000 )
+[connection signal="card_drop" from="Board" to="." method="_on_Board_card_drop"]
 [connection signal="hover" from="Board" to="." method="_on_Board_hover"]
 [connection signal="unhover" from="Board" to="." method="_on_Board_unhover"]
 [connection signal="drop" from="Hand" to="." method="_on_Hand_drop"]

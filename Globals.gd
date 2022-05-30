@@ -9,7 +9,7 @@ enum Player {player, opponent}
 var turn_of = Player.player
 
 var player_actions = 0
-var player_gold = 1
+var player_gold = 2
 
 var can_play = true
 

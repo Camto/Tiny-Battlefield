@@ -5,6 +5,7 @@ onready var Globals = get_node("/root/Globals")
 signal hover(card)
 signal drop(card)
 signal play(card, zone)
+signal move(card, zone)
 signal error_playing(msg)
 
 const Deck_Card = preload("res://Deck_Card.gd")
@@ -69,6 +70,23 @@ func attempt_to_play_on(zone):
 				emit_signal("error_playing", "Not a valid zone")
 		else:
 			emit_signal("error_playing", "Not a unit card")
+	elif state is Play_Card:
+		if card_data is Unit_Card_Data:
+			if zone is Tile:
+				if zone.card == null:
+					if zone.adjacent(get_parent()):
+						Globals.spend_actions(1)
+						emit_signal("move", self, zone)
+					else:
+						emit_signal("error_playing", "Can only move to adjacent zone")
+				elif zone.card.player != player:
+					pass
+				else:
+					emit_signal("error_playing", "Can't attack friendly units")
+			else:
+				emit_signal("error_playing", "Not a valid zone to move or attack")
+		else:
+			emit_signal("error_playing", "Can't move or attack with building")
 	else:
 		emit_signal("error_playing", "Card already in play")
 
