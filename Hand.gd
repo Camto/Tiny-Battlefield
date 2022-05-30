@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var Globals = get_node("/root/Globals")
+
 signal hover(card)
 signal drop(card)
 signal play(card, zone)
@@ -12,6 +14,8 @@ func _ready():
 
 func add_card():
 	var card = Card.instance()
+	card.player = Globals.Player.player
+	card.card_data = Globals.openable_cards[0]
 	card.connect("hover", self, "_on_Card_hover")
 	card.connect("drop", self, "_on_Card_drop")
 	card.connect("play", self, "_on_Card_play")
@@ -31,6 +35,9 @@ func _on_Card_drop(card):
 	emit_signal("drop", card)
 
 func _on_Card_play(card, zone):
+	card.disconnect("hover", self, "_on_Card_hover")
+	card.disconnect("drop", self, "_on_Card_drop")
+	card.disconnect("play", self, "_on_Card_play")
 	remove_child(card)
 	reposition_cards()
 	emit_signal("play", card, zone)

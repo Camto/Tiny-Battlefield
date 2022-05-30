@@ -1,10 +1,20 @@
 extends Node2D
 
+onready var Globals = get_node("/root/Globals")
+
 signal hover(card)
 signal drop(card)
 signal play(card, zone)
+signal error_playing(msg)
 
-enum Form {hand, play}
+const Deck_Card = preload("res://Deck_Card.gd")
+const Hand_Card = preload("res://Hand_Card.gd")
+const Play_Card = preload("res://Play_Card.gd")
+const Discard_Card = preload("res://Discard_Card.gd")
+
+const Unit_Card_Data = preload("res://Unit_Card_Data.gd")
+const Building_Card_Data = preload("res://Building_Card_Data.gd")
+const Event_Card_Data = preload("res://Event_Card_Data.gd")
 
 const Tile = preload("res://Tile.gd")
 
@@ -20,12 +30,14 @@ var dragging
 onready var home = position
 onready var up = home - Vector2(0, 100)
 
-var form = Form.hand
+var player
+var card_data
+var state = Hand_Card.new()
 
 func _process(delta):
 	if dragging:
 		position = get_parent().to_local(get_viewport().get_mouse_position())
-	elif form == Form.play:
+	elif state is Play_Card:
 		position = Vector2.ZERO
 	elif highlighted:
 		position = up
@@ -37,32 +49,46 @@ func set_hand_pos(idx, total):
 	up = home - Vector2(0, 100)
 
 func attempt_to_play_on(zone):
-	if zone is Tile:
-		form = Form.play
-		$Polygon2D.visible = false
-		$Sprite.visible = false
-		$Sprite2.visible = true
-		emit_signal("play", self, zone)
-
-func reparent_to_zone(zone):
-	zone.add_child(self)
-	set_owner(zone)
+	if state is Hand_Card:
+		if card_data is Unit_Card_Data:
+			if zone is Tile:
+				if zone.card == null:
+					if Globals.get_gold() >= card_data.cost:
+						Globals.spend_actions(1)
+						Globals.spend_gold(card_data.cost)
+						state = Play_Card.new()
+						$Polygon2D.visible = false
+						$Sprite.visible = false
+						$Sprite2.visible = true
+						emit_signal("play", self, zone)
+					else:
+						emit_signal("error_playing", "Not enough gold")
+				else:
+					emit_signal("error_playing", "Tile already occupied")
+			else:
+				emit_signal("error_playing", "Not a valid zone")
+		else:
+			emit_signal("error_playing", "Not a unit card")
+	else:
+		emit_signal("error_playing", "Card already in play")
 
 func _on_Area2D_mouse_entered():
-	if !dragging && !highlighted:
+	if Globals.turn_of == player && !dragging && !highlighted:
 		highlighted = true
 		z_index = 10
 		emit_signal("hover", self)
 
 func _on_Area2D_mouse_exited():
-	if !dragging && highlighted:
+	if Globals.turn_of == player && !dragging && highlighted:
 		highlighted = false
 		z_index = 0
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
-		if event.pressed:
+		if Globals.can_play && Globals.turn_of == player && event.pressed:
 			dragging = true
-		else:
+			z_index = 20
+		elif Globals.can_play && Globals.turn_of == player:
 			dragging = false
+			z_index = 0
 			emit_signal("drop", self)

@@ -15,7 +15,7 @@ func _ready():
 			add_child(tile)
 
 func play(card, zone):
-	card.reparent_to_zone(zone)
+	zone.set_card(card)
 
 func _on_Tile_hover(tile):
 	emit_signal("hover", tile)
