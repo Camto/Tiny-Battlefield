@@ -9,17 +9,21 @@ signal play(card, zone)
 const Card = preload("res://Scenes/Card.tscn")
 
 func _ready():
-	for i in range(4):
-		add_card()
+	for i in range(3):
+		draw()
 
-func add_card():
+func draw():
+	if Globals.deck.size() > 0:
+		add_card(Globals.deck.pop_back())
+
+func add_card(card_data):
 	var card = Card.instance()
-	card.player = Globals.Player.player
-	card.card_data = Globals.openable_cards[0]
+	add_child(card)
+	card.set_player(Globals.Player.player)
+	card.set_card_data(card_data)
 	card.connect("hover", self, "_on_Card_hover")
 	card.connect("drop", self, "_on_Card_drop")
 	card.connect("play", self, "_on_Card_play")
-	add_child(card)
 	reposition_cards()
 
 func reposition_cards():

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Card.gd" type="Script" id=1]
-[ext_resource path="res://Images/icon.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Card_Sprite.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Images/icon.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 115, 150 )
@@ -22,19 +23,20 @@ shape = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Play_Hitbox"]
 shape = SubResource( 2 )
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color( 0.933333, 0.788235, 0.580392, 1 )
-polygon = PoolVector2Array( 115, 150, -115, 150, -115, -150, 115, -150 )
+[node name="Hand_Sprite" parent="." instance=ExtResource( 2 )]
 
-[node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 3.57523, 4.68754 )
-texture = ExtResource( 2 )
-
-[node name="Sprite2" type="Sprite" parent="."]
+[node name="Play_Sprite" type="Sprite" parent="."]
 visible = false
 scale = Vector2( 2, 2 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
+
+[node name="Opponent_Indicator" type="Polygon2D" parent="."]
+visible = false
+color = Color( 1, 0, 0, 0.388235 )
+polygon = PoolVector2Array( -17.6253, -35.3747, 10.6355, -57.6127, 18.9747, -37.6911, 49.0886, -32.1317, 33.3367, -1.55443, 50.0152, 38.7519, 23.1443, 34.5823, 5.07596, 54.9671, -15.3088, 29.0228, -58.8582, 26.7063, -35.2304, -0.164566, -57.0051, -41.8608 )
 [connection signal="input_event" from="Hand_Hitbox" to="." method="_on_Hand_Hitbox_input_event"]
 [connection signal="mouse_entered" from="Hand_Hitbox" to="." method="_on_Hand_Hitbox_mouse_entered"]
 [connection signal="mouse_exited" from="Hand_Hitbox" to="." method="_on_Hand_Hitbox_mouse_exited"]
 [connection signal="input_event" from="Play_Hitbox" to="." method="_on_Play_Hitbox_input_event"]
+[connection signal="mouse_entered" from="Play_Hitbox" to="." method="_on_Play_Hitbox_mouse_entered"]
+[connection signal="mouse_exited" from="Play_Hitbox" to="." method="_on_Play_Hitbox_mouse_exited"]

@@ -101,7 +101,7 @@ Swift. Swift. Swift.
 
 Gold Mine 0G
 Building
-When this is destroyed, gain 1G.
+When this is destroyed, gain 3G.
 
 Farmland 1G
 Building

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Board.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Hand.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Resources/Tahoma.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Scenes/Card_Sprite.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Resources/Tahoma.tres" type="DynamicFont" id=5]
 
 [node name="Game" type="Node2D"]
 position = Vector2( 0, 2 )
@@ -15,66 +16,113 @@ position = Vector2( 960, 450 )
 [node name="Hand" parent="." instance=ExtResource( 3 )]
 position = Vector2( 960, 1000 )
 
-[node name="Player_Resources" type="Node" parent="."]
+[node name="Discard" type="Node2D" parent="."]
+position = Vector2( 1628.64, 424.57 )
+
+[node name="Card_Preview" parent="." instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 304.622, 543.787 )
+scale = Vector2( 1.75, 1.75 )
+
+[node name="Player_Resources" type="Node2D" parent="."]
+position = Vector2( 43.5231, 47.7303 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Top Label" type="RichTextLabel" parent="Player_Resources"]
-margin_left = 21.0
-margin_top = 29.093
-margin_right = 408.0
-margin_bottom = 84.093
-custom_fonts/normal_font = ExtResource( 4 )
+margin_left = 0.426025
+margin_top = -0.187012
+margin_right = 387.426
+margin_bottom = 54.813
+custom_fonts/normal_font = ExtResource( 5 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 text = "Your resources:"
 
 [node name="A_Label" type="RichTextLabel" parent="Player_Resources"]
-margin_left = 21.0
-margin_top = 104.05
-margin_right = 408.0
-margin_bottom = 159.05
-custom_fonts/normal_font = ExtResource( 4 )
+margin_left = 0.426025
+margin_top = 74.77
+margin_right = 387.426
+margin_bottom = 129.77
+custom_fonts/normal_font = ExtResource( 5 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 text = "A:"
 
 [node name="G_Label" type="RichTextLabel" parent="Player_Resources"]
-margin_left = 21.0
-margin_top = 158.329
-margin_right = 408.0
-margin_bottom = 213.329
-custom_fonts/normal_font = ExtResource( 4 )
+margin_left = 0.426025
+margin_top = 129.049
+margin_right = 387.426
+margin_bottom = 184.049
+custom_fonts/normal_font = ExtResource( 5 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 text = "G:"
 
-[node name="Opponent_Resources" type="Node" parent="."]
+[node name="Opponent_Resources" type="Node2D" parent="."]
+position = Vector2( 1478.72, 56.3609 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Top Label" type="RichTextLabel" parent="Opponent_Resources"]
-margin_left = 1497.98
-margin_top = 29.0
-margin_right = 1926.98
-margin_bottom = 84.0
-custom_fonts/normal_font = ExtResource( 4 )
+margin_left = -1.06799
+margin_top = -0.607285
+margin_right = 427.932
+margin_bottom = 54.3927
+custom_fonts/normal_font = ExtResource( 5 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 text = "Opponent's resources:"
 
 [node name="A_Label" type="RichTextLabel" parent="Opponent_Resources"]
-margin_left = 1498.41
-margin_top = 104.05
-margin_right = 1885.41
-margin_bottom = 159.05
-custom_fonts/normal_font = ExtResource( 4 )
+margin_left = -0.637939
+margin_top = 74.4427
+margin_right = 386.362
+margin_bottom = 129.443
+custom_fonts/normal_font = ExtResource( 5 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 text = "A:"
 
 [node name="G_Label" type="RichTextLabel" parent="Opponent_Resources"]
-margin_left = 1498.41
-margin_top = 158.329
-margin_right = 1885.41
-margin_bottom = 213.329
-custom_fonts/normal_font = ExtResource( 4 )
+margin_left = -0.637939
+margin_top = 128.722
+margin_right = 386.362
+margin_bottom = 183.722
+custom_fonts/normal_font = ExtResource( 5 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 text = "G:"
+
+[node name="Gold_Button" type="Button" parent="."]
+margin_left = 1681.45
+margin_top = 664.067
+margin_right = 1881.45
+margin_bottom = 751.067
+custom_fonts/font = ExtResource( 5 )
+text = "Gain 1 G"
+
+[node name="Draw_Button" type="Button" parent="."]
+margin_left = 1621.89
+margin_top = 800.511
+margin_right = 1883.89
+margin_bottom = 895.511
+custom_fonts/font = ExtResource( 5 )
+text = "Draw 1 card"
+
+[node name="Pass_Button" type="Button" parent="."]
+margin_left = 1600.0
+margin_top = 941.0
+margin_right = 1883.0
+margin_bottom = 1036.0
+custom_fonts/font = ExtResource( 5 )
+text = "Pass the turn"
+[connection signal="card_attack" from="Board" to="." method="_on_Board_card_attack"]
+[connection signal="card_die" from="Board" to="." method="_on_Board_card_die"]
 [connection signal="card_drop" from="Board" to="." method="_on_Board_card_drop"]
+[connection signal="card_hover" from="Board" to="." method="_on_Board_card_hover"]
 [connection signal="card_move" from="Board" to="." method="_on_Board_card_move"]
 [connection signal="hover" from="Board" to="." method="_on_Board_hover"]
 [connection signal="unhover" from="Board" to="." method="_on_Board_unhover"]
 [connection signal="drop" from="Hand" to="." method="_on_Hand_drop"]
+[connection signal="hover" from="Hand" to="." method="_on_Hand_hover"]
 [connection signal="play" from="Hand" to="." method="_on_Hand_play"]
+[connection signal="pressed" from="Gold_Button" to="." method="_on_Gold_Button_pressed"]
+[connection signal="pressed" from="Draw_Button" to="." method="_on_Draw_Button_pressed"]
+[connection signal="pressed" from="Pass_Button" to="." method="_on_Pass_Button_pressed"]

@@ -22,6 +22,8 @@ var can_play = true
 var opponent_actions = 0
 var opponent_gold = 0
 
+var deck = []
+
 var dragging = false
 
 var openable_cards = []
@@ -85,6 +87,9 @@ func pass_turn():
 		turn_of = Player.player
 	gain_actions(1)
 
+func get_random_card():
+	return openable_cards[randi() % openable_cards.size()]
+
 func _ready():
 	update_actions_visual(Player.player)
 	update_gold_visual(Player.player)
@@ -100,6 +105,19 @@ func _ready():
 	card.card_name = "Soldier"
 	card.cost = 1
 	card.text = ""
+	card.art = preload("res://Images/Soldier.png")
 	card.power = 1
 	card.effects = {}
 	openable_cards.append(card)
+	
+	card = Unit_Card_Data.new()
+	card.card_name = "Brute"
+	card.cost = 2
+	card.text = ""
+	card.art = preload("res://Images/Brute.png")
+	card.power = 2
+	card.effects = {}
+	openable_cards.append(card)
+	
+	for i in range(6):
+		deck.append(get_random_card())
