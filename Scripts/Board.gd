@@ -39,3 +39,4 @@ func _on_Card_drop(card):
 func _on_Card_move(card, zone):
 	card.get_parent().unset_card()
 	zone.set_card(card)
+	emit_signal("card_move", card, zone)

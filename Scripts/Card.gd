@@ -56,7 +56,6 @@ func attempt_to_play_on(zone):
 			if zone is Tile:
 				if zone.card == null:
 					if Globals.get_gold() >= card_data.cost:
-						Globals.spend_actions(1)
 						Globals.spend_gold(card_data.cost)
 						state = Play_Card.new()
 						$Polygon2D.visible = false
@@ -76,7 +75,6 @@ func attempt_to_play_on(zone):
 			if zone is Tile:
 				if zone.card == null:
 					if zone.adjacent(get_parent()):
-						Globals.spend_actions(1)
 						emit_signal("move", self, zone)
 					else:
 						emit_signal("error_playing", "Can only move to adjacent zone")
@@ -91,23 +89,33 @@ func attempt_to_play_on(zone):
 	else:
 		emit_signal("error_playing", "Card already in play")
 
-func _on_Area2D_mouse_entered():
-	if Globals.turn_of == player && !dragging && !highlighted:
+func _on_Hand_Hitbox_mouse_entered():
+	if !dragging && !highlighted:
 		highlighted = true
 		z_index = 10
 		emit_signal("hover", self)
 
-func _on_Area2D_mouse_exited():
-	if Globals.turn_of == player && !dragging && highlighted:
+func _on_Hand_Hitbox_mouse_exited():
+	if !dragging && highlighted:
 		highlighted = false
 		z_index = 0
 
-func _on_Area2D_input_event(viewport, event, shape_idx):
+func _on_Hand_Hitbox_input_event(viewport, event, shape_idx):
+	if state is Hand_Card:
+		hitbox_manage_event(event)
+
+func _on_Play_Hitbox_input_event(viewport, event, shape_idx):
+	if state is Play_Card:
+		hitbox_manage_event(event)
+
+func hitbox_manage_event(event):
 	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
-		if Globals.can_play && Globals.turn_of == player && event.pressed:
+		if !Globals.dragging && Globals.can_play && Globals.turn_of == player && event.pressed:
+			Globals.dragging = true
 			dragging = true
 			z_index = 20
 		elif dragging && Globals.can_play && Globals.turn_of == player:
+			Globals.dragging = false
 			dragging = false
 			z_index = 0
 			emit_signal("drop", self)
